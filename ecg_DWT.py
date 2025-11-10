@@ -30,7 +30,7 @@ for i in range(1, len(coeffs)):
     threshold= statistics.median(np.abs(coeffs[i]/np.linalg.norm(coeffs[i])))/0.6745 * np.sqrt(2*np.log(len(data))/len(data))
     print(threshold)
     coeffs[i] = pywt.threshold(coeffs[i], threshold*max(coeffs[i]), 'soft')
-    plt.plot(coeffs[i])
+    #plt.plot(coeffs[i])
 
 coeffs_name = ''
 for k in args.file: # list_coeffs is args, 0, -1, -2
@@ -42,9 +42,9 @@ for k in args.file: # list_coeffs is args, 0, -1, -2
 #coeffs[-1] = np.zeros(coeffs[-1].shape)
 #coeffs[-2] = np.zeros(coeffs[-2].shape)
 
-cA8,d8,d7,d6,d5,d4,d3 ,cD2, cD1 = coeffs
+#cA8,d8,d7,d6,d5,d4,d3 ,cD2, cD1 = coeffs
 
-
+plt.figure(figsize=(12, 10))
 for i in range(0, len(coeffs)):
     plt.subplot(maxlev+1, 1, i+1)
     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=1)
@@ -52,7 +52,7 @@ for i in range(0, len(coeffs)):
 
 plt.tight_layout()
 plt.savefig('coeffs_'+str(coeffs_name)+'.png')
-
+plt.close()
 
 
 datarec = pywt.waverec(coeffs, w) #Multilevel reconstruction using waverec
